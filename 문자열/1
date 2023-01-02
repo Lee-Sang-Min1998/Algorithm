@@ -1,1 +1,14 @@
+public static int[] solution(int[] arr, int divisor) {
+        int[] answer = {};
+        List<Integer> temp = new ArrayList<>();
 
+        for( int i : arr){
+            if(i%divisor==0)
+                temp.add(i);
+        }
+        if(temp.size()==0)
+            temp.add(-1);
+        Collections.sort(temp);
+        answer= temp.stream().mapToInt(i -> i).toArray();
+        return answer;
+    }
