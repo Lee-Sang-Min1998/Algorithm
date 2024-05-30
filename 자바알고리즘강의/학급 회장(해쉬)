@@ -1,0 +1,36 @@
+import java.util.*;
+import java.util.Map.Entry;
+
+/**
+ * 문자열 s >> char array 변환 메소드 : s.toCharArray()
+ * HashMap에서 key와 맵핑된 value값을 반환하고 없으면 defaultValue값을 반환 : hashMap.getOrDefault(key,defaultValue)
+ * HashMap에서 모든 key-value 데이터를 가진 Set을 반환 : hashMap.entrySet() >> Map.Entry<key,value>
+ */
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+
+        char[] arr = s.toCharArray();
+        for (char c : arr) {
+            Integer value = hashMap.getOrDefault(c, 0);
+            hashMap.put(c, ++value);
+        }
+
+        char key = ' ';
+        int max = 0;
+
+        for (Entry<Character, Integer> set : hashMap.entrySet()) {
+            if (max < set.getValue()) {
+                max = set.getValue();
+                key = set.getKey();
+            }
+        }
+
+        System.out.print(key);
+
+    }
+}
