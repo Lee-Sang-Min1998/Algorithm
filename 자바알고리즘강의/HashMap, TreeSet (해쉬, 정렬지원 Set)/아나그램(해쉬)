@@ -1,0 +1,34 @@
+import java.util.*;
+
+
+/**
+ *
+ */
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        char[] a = sc.next().toCharArray();
+        char[] b = sc.next().toCharArray();
+
+        Map<Character, Integer> hashMap = new HashMap<>();
+
+        for (char c : a) {
+            hashMap.put(c, hashMap.getOrDefault(c, 0) + 1);
+        }
+
+        for (char c : b) {
+            hashMap.put(c, hashMap.getOrDefault(c, 0) - 1);
+        }
+
+
+        for (Map.Entry<Character,Integer> set : hashMap.entrySet()) {
+                if(set.getValue() < 0){
+                    System.out.println("NO");
+                    return;
+                }
+        }
+
+        System.out.println("YES");
+    }
+}
