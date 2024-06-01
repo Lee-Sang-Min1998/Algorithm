@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+
+
+/**
+ *
+ */
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String s = br.readLine();
+        String t = br.readLine();
+
+        Map<Character, Integer> smap = new HashMap<>();
+        Map<Character, Integer> tmap = new HashMap<>();
+
+        int answer = 0;
+        boolean isAlagram = true;
+
+        for (int i = 0; i < t.length(); i++) {
+            smap.put(s.charAt(i), smap.getOrDefault(s.charAt(i), 0) + 1);
+        }
+
+        for (int i = 0; i < t.length(); i++) {
+            tmap.put(t.charAt(i), tmap.getOrDefault(t.charAt(i), 0) + 1);
+        }
+    
+        int lt = 0;
+
+        for (int rt = t.length(); rt <= s.length(); rt++) {
+
+            for (Map.Entry<Character, Integer> element : smap.entrySet()) {
+                if ((element.getValue() != tmap.get(element.getKey())) || !tmap.containsKey(element.getKey())) {
+                    isAlagram = false;
+                    break;
+                }
+            }
+
+            if (isAlagram == true) {
+                answer++;
+            }
+
+            char index = s.charAt(lt++);
+            int value = smap.get(index);
+            if (value == 1) {
+                smap.remove(index);
+            } else {
+                smap.put(index, --value);
+            }
+
+            if (rt != s.length()) {
+                smap.put(s.charAt(rt), smap.getOrDefault(s.charAt(rt), 0) + 1);
+            }
+            isAlagram = true;
+        }
+
+        System.out.println(answer);
+    }
+}
